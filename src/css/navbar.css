@@ -1,0 +1,160 @@
+/* === GLOBAL FIX === */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* === SIDEBAR BASE === */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;                  /* ✅ full window height */
+  width: 250px;                   /* wider, sidebar style */
+  background-color: #1e1e1e;
+  border-right: 2px solid #2d2d2d;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  box-shadow: 3px 0 10px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  transition: width 0.3s ease;
+  overflow: hidden;
+}
+
+.navbar.collapsed {
+  width: 70px;                    /* ✅ collapsed sidebar */
+}
+
+/* === HEADER === */
+.navbar-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  border-bottom: 1px solid #333;
+  color: #00b055;
+  font-weight: 600;
+  font-size: 1.2rem;
+  min-height: 60px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* === SCROLLABLE MENU === */
+.navbar-menu {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  list-style: none;
+  margin: 0;
+  padding: 1rem 0.6rem;
+  scrollbar-width: thin;
+  scrollbar-color: #444 transparent;
+}
+
+/* scrollbar styling for webkit */
+.navbar-menu::-webkit-scrollbar {
+  width: 6px;
+}
+.navbar-menu::-webkit-scrollbar-thumb {
+  background: #444;
+  border-radius: 6px;
+}
+
+/* === MENU ITEMS === */
+.navbar-menu li {
+  margin: 0.3rem 0;
+}
+
+.navbar-menu li a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  color: #ccc;
+  text-decoration: none;
+  font-size: 0.95rem;
+  border-radius: 6px;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.navbar-menu li a:hover {
+  background-color: #2d2d2d;
+  color: #00b055;
+  transform: translateX(4px);
+}
+
+.navbar-menu li a.active {
+  background-color: #00b055;
+  color: #fff;
+  font-weight: 600;
+  transform: none;
+}
+
+/* === COLLAPSED SIDEBAR === */
+.navbar.collapsed .navbar-menu li a {
+  justify-content: center;
+  font-size: 0;
+  padding: 12px;
+}
+
+.navbar.collapsed .navbar-menu li a svg {
+  margin: 0;
+  width: 24px;
+  height: 24px;
+}
+
+.navbar.collapsed .navbar-menu li a:hover {
+  background-color: #2d2d2d;
+  transform: none;
+}
+
+/* === FLOATING TOGGLE BUTTON === */
+.navbar-toggle-floating {
+  position: fixed;
+  top: 20px;
+  left: 250px;                    /* attach to sidebar edge */
+  transform: translateX(50%);
+  background: #2c2c2c;
+  border: 2px solid #333;
+  border-radius: 8px;
+  color: #ccc;
+  cursor: pointer;
+  padding: 6px 10px;
+  transition: all 0.3s ease;
+  z-index: 1200;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+}
+
+.navbar-toggle-floating:hover {
+  background-color: #00b055;
+  color: #fff;
+}
+
+.navbar-toggle-floating.collapsed {
+  left: 70px;
+}
+
+/* === RESPONSIVE BEHAVIOR === */
+@media (max-width: 768px) {
+  .navbar {
+    width: 200px;
+    height: 100vh;
+  }
+
+  .navbar.collapsed {
+    width: 60px;
+  }
+
+  .navbar-toggle-floating {
+    left: 200px;
+  }
+
+  .navbar-toggle-floating.collapsed {
+    left: 60px;
+  }
+}
